@@ -1,0 +1,177 @@
+{
+  "contract": {
+    "shapes": {
+      "train": [
+        110000,
+        17
+      ],
+      "holdout": [
+        50000,
+        17
+      ],
+      "scoring": [
+        40000,
+        15
+      ]
+    },
+    "arm_share_train": {
+      "0": 0.2507090909090909,
+      "1": 0.25082727272727273,
+      "2": 0.24776363636363635,
+      "3": 0.2507
+    },
+    "churn_rate_train": 0.3733818181818182,
+    "annual_value_eq_12mrr": true,
+    "leak_mean_by_outcome": {
+      "retained": 8.008124419684309,
+      "churned": 1.0059164394234514
+    },
+    "scoring_leak_looks_realistic": {
+      "mean": 4.497425,
+      "min": 0,
+      "max": 15,
+      "n_unique": 16
+    }
+  },
+  "winner": "v3",
+  "promote_v3": true,
+  "v1_holdout": {
+    "name": "v1_holdout",
+    "budget": 40000,
+    "spend": 40000.0,
+    "n_treated": 2668,
+    "arm_mix": {
+      "0": 47332,
+      "1": 0,
+      "2": 2,
+      "3": 2666
+    },
+    "ipw_value": 84.8880128,
+    "ipw_incremental": -0.6498208000000005,
+    "ipw_incremental_total": -32491.040000000026,
+    "dr_value": 85.97860778880725,
+    "dr_incremental": -0.7161723680203522,
+    "dr_incremental_total": -35808.61840101761,
+    "qini": -0.08479763961349528,
+    "qini_value": -0.08252426678641715,
+    "sleeping_dogs_contacted": 0,
+    "fraction_untreated": 0.94664
+  },
+  "v2_holdout": {
+    "name": "v2_holdout",
+    "budget": 40000,
+    "spend": 35284.0,
+    "n_treated": 32124,
+    "arm_mix": {
+      "0": 17876,
+      "1": 31334,
+      "2": 790,
+      "3": 0
+    },
+    "ipw_value": 89.08568960000001,
+    "ipw_incremental": 3.54785600000001,
+    "ipw_incremental_total": 177392.8000000005,
+    "dr_value": 88.8675340483764,
+    "dr_incremental": 2.172753891548794,
+    "dr_incremental_total": 108637.6945774397,
+    "qini": 0.02426992617597841,
+    "qini_value": 0.07696491675360366,
+    "sleeping_dogs_contacted": 0,
+    "fraction_untreated": 0.35752
+  },
+  "v2_greedy_holdout": {
+    "name": "v2_greedy_holdout",
+    "budget": 40000,
+    "spend": 35284.0,
+    "n_treated": 32124,
+    "arm_mix": {
+      "0": 17876,
+      "1": 31334,
+      "2": 790,
+      "3": 0
+    },
+    "ipw_value": 89.08568960000001,
+    "ipw_incremental": 3.54785600000001,
+    "ipw_incremental_total": 177392.8000000005,
+    "dr_value": 88.8675340483764,
+    "dr_incremental": 2.172753891548794,
+    "dr_incremental_total": 108637.6945774397,
+    "qini": 0.02426992617597841,
+    "qini_value": 0.07696491675360366,
+    "sleeping_dogs_contacted": 0,
+    "fraction_untreated": 0.35752
+  },
+  "v3_holdout": {
+    "name": "v3_holdout",
+    "budget": 40000,
+    "spend": 39997.0,
+    "n_treated": 27435,
+    "arm_mix": {
+      "0": 22565,
+      "1": 24362,
+      "2": 3046,
+      "3": 27
+    },
+    "ipw_value": 88.89224320000001,
+    "ipw_incremental": 3.354409600000011,
+    "ipw_incremental_total": 167720.48000000056,
+    "dr_value": 89.12430277762877,
+    "dr_incremental": 2.4295226208011655,
+    "dr_incremental_total": 121476.13104005827,
+    "qini": 0.04280708035951417,
+    "qini_value": 0.10264687520342979,
+    "sleeping_dogs_contacted": 0,
+    "fraction_untreated": 0.4513
+  },
+  "winner_half_budget": {
+    "name": "v3_holdout_20k",
+    "budget": 20000,
+    "spend": 20000.0,
+    "n_treated": 18768,
+    "arm_mix": {
+      "0": 31232,
+      "1": 18460,
+      "2": 308,
+      "3": 0
+    },
+    "ipw_value": 87.7167264,
+    "ipw_incremental": 2.1788928,
+    "ipw_incremental_total": 108944.64,
+    "dr_value": 88.78653640662108,
+    "dr_incremental": 2.0917562497934767,
+    "dr_incremental_total": 104587.81248967383,
+    "qini": 0.04280708035951417,
+    "qini_value": 0.10264687520342979,
+    "sleeping_dogs_contacted": 0,
+    "fraction_untreated": 0.62464
+  },
+  "bootstrap": {
+    "ipw_incremental_mean": 3.2842865706666657,
+    "ipw_incremental_ci95": [
+      1.3458025599999863,
+      5.831461199999987
+    ],
+    "dr_incremental_mean": 2.3563277780234,
+    "dr_incremental_ci95": [
+      1.0993691329068611,
+      3.685877362421705
+    ]
+  },
+  "scoring_allocation_spend": 39996.0,
+  "scoring_arm_mix": {
+    "0": 16522,
+    "1": 19501,
+    "2": 3916,
+    "3": 61
+  },
+  "half_budget_scoring_spend": 20000.0,
+  "notes": {
+    "dr_nuisances": "fit on train only",
+    "uplift_score_def": "max_a tau_a * annual_value (ranking); allocation still uses V=tau*AV-cost",
+    "naive_task_refs": {
+      "capture": -0.02,
+      "qini": -0.03
+    },
+    "qini_note": "Diagnostic Qini collapses all paid arms vs control; primary objective is budgeted IPW/DR dollars. Not identical to grader oracle Qini."
+  }
+}
