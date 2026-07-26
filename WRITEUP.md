@@ -20,8 +20,8 @@ In Tandem’s products support families through coordination and co-parenting wo
 - Features: pre-treatment only; **never** `offer_window_logins`.
 - **v1:** control-only churn model → spend budget on concierge for highest-risk users (the trap).
 - **v2:** tenure×activity segments with shrunken segment×arm net-ATEs + λ-search allocation.
-- **v3:** shrunken cross-fitted HistGBDT T-learner CATEs + same λ allocator (`argmax_a(\hat V_a - \lambda c_a)`).
-- Holdout evaluation: IPW + DR with known ~1/4 propensities; **DR nuisances fit on train only**. Promote v3 only if it clearly beats v2 on frozen holdout.
+- **v3:** shrunken HistGBDT T-learner CATEs + same λ allocator (`argmax_a(\hat V_a - \lambda c_a)`). Final holdout/scoring predictions come from models **refit on full train**; cross-fitting was used only as a development diagnostic.
+- Holdout evaluation: IPW + DR with known ~1/4 propensities; **DR nuisances fit on train only**. v3 was promoted only after beating v2 on holdout DR incremental value — so holdout functioned as a **selection set** for the final policy, not a purely untouched one-shot exam.
 
 ## Iteration log (holdout, must match `outputs/iteration_log.csv`)
 
@@ -67,4 +67,5 @@ python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 python run_pipeline.py          # writes allocation.csv, holdout_scores.csv, outputs/*
 python build_notebook.py        # executes Retention_Allocation.ipynb
+# optional: open interactive_brief/index.html for the stakeholder summary
 ```

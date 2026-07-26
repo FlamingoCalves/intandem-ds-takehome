@@ -16,11 +16,12 @@ AI helped draft the methodology, scaffold the Python package (`src/`), pipeline 
 
 ## Where judgment overrode AI defaults
 
-- Kept packaging focused on the graded artifacts (notebook with visible iteration + short writeup) rather than a separate custom interactive web brief. Interactive Plotly charts live in the notebook / HTML export.
+- Shipped the graded core (notebook with visible iteration + short writeup + CSVs) **and** an In Tandem–branded stakeholder brief in `interactive_brief/` with interactive Plotly charts; notebook HTML export also embeds Plotly.
 - Required a **v1 negative plumbing check** before trusting later OPE numbers.
-- Required an explicit **promotion gate** for v3 vs v2 (relative + absolute holdout DR lift); would have shipped v2 if the gate failed.
-- Kept sklearn HistGBDT T-learner rather than pulling in econml/causalml for the first shippable path.
+- Required an explicit **promotion gate** for v3 vs v2 (relative + absolute holdout DR lift); would have shipped v2 if the gate failed. That means holdout was used for model selection, not only as a one-shot final exam.
+- Kept sklearn HistGBDT T-learner rather than pulling in econml/causalml for the shippable path. Final scoring models are refit on full train; cross-fitting was a development diagnostic, not the production scorer.
 - Treated grader “perfect foresight capture %” as **not estimable** from the public bundle; reported IPW/DR dollars instead of inventing an oracle.
+- Separated **allocation** (net value under λ-budget) from **`uplift_score`** ranking (`max_a τ·AV`) after a cheap score pass improved diagnostic Qini without changing the dollar policy.
 
 ## What AI did *not* do
 

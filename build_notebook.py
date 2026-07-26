@@ -138,13 +138,14 @@ show_fig(fig)
 """
         ),
         md(
-            """## 3. Evaluation rules (frozen holdout)
+            """## 3. Evaluation rules (holdout)
 
 - **Train / train-val:** iterate here.
-- **Holdout:** score **once** for the final comparison. DR outcome models are fit on **train only**.
+- **Holdout:** final IPW/DR report card; also used to **choose** v3 over v2 (selection set). DR outcome models are fit on **train only**.
 - Primary decision metric: **IPW + DR net incremental value vs all-control** under the $40k constraint.
 - `holdout_scores.csv` uses `uplift_score = max_a τ̂_a · annual_value` (best-arm expected incremental revenue for ranking). Allocation still uses net value under the budget.
 - Multi-arm “Qini” is diagnostic; policy value under budget is the headline.
+- **v3 scoring note:** predictions for holdout/scoring come from models **refit on full train**; cross-fitting is a development diagnostic only.
 """
         ),
         code(

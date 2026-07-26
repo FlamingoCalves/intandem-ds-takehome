@@ -32,7 +32,7 @@ Or in Colab: paste `colab_bootstrap.txt`, then copy this repo’s `src/` + `run_
 
 ## Method (one paragraph)
 
-Exclude the post-treatment leak `offer_window_logins`. Start from a **naive churn → concierge** baseline (shows negative holdout value). Then estimate per-arm effects (segment-shrunken ATEs, then a shrunken T-learner), convert to net value, and allocate with a **λ-search** under the budget while keeping offers off predicted sleeping dogs. Validate with **IPW + DR** on the frozen holdout (nuisances fit on train only). **Shipped policy: v3** (see `WRITEUP.md`).
+Exclude the post-treatment leak `offer_window_logins`. Start from a **naive churn → concierge** baseline (shows negative holdout value). Then estimate per-arm effects (segment-shrunken ATEs, then a shrunken T-learner), convert to net value, and allocate with a **λ-search** under the budget while keeping offers off predicted sleeping dogs. Validate with **IPW + DR** on holdout (nuisances fit on train only; holdout also used to choose v3 over v2). **Shipped policy: v3** (see `WRITEUP.md`). Stakeholder summary: `interactive_brief/index.html`.
 
 ## Notes
 

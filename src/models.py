@@ -1,4 +1,4 @@
-"""v1 naive churn, v2 segment shrunken net-ATE, v3 cross-fitted T-learner."""
+"""v1 naive churn, v2 segment shrunken net-ATE, v3 T-learner (+ optional OOF diagnostic)."""
 
 from __future__ import annotations
 

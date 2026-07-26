@@ -147,7 +147,7 @@ def main() -> None:
     print("v2 greedy secondary:", _eval_to_dict(ev2_greedy))
 
     # ----- v3 -----
-    print("\n=== v3 cross-fitted T-learner + λ (timeboxed) ===")
+    print("\n=== v3 T-learner + λ (timeboxed; full-train scorer) ===")
     v3_val = fit_v3_tlearner(train_dev, train_val, budget=BUDGET, fit_full_for_target=False)
     v3_hold = fit_v3_tlearner(train, holdout, budget=BUDGET, fit_full_for_target=True)
     ev3_val = summarize_policy(
