@@ -26,7 +26,10 @@ python run_pipeline.py       # writes CSVs + outputs/metrics.json
 python build_notebook.py     # builds & executes the notebook
 ```
 
-Open the stakeholder brief: `interactive_brief/index.html` (double-click or serve the folder).
+**Stakeholder brief (recommended for reviewers):**  
+https://flamingocalves.github.io/intandem-ds-takehome/interactive_brief/
+
+Local fallback: open `interactive_brief/index.html` (double-click or serve the folder).
 
 Or in Colab: paste `colab_bootstrap.txt`, then copy this repo’s `src/` + `run_pipeline.py`.
 
