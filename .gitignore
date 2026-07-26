@@ -2,7 +2,10 @@
 __pycache__/
 *.pyc
 .ipynb_checkpoints/
-# candidate outputs (don't commit until submitting)
-# target.csv
-# holdout_scores.csv
 .DS_Store
+outputs/*.log
+
+# Private interview prep — never submit
+PLAIN_LANGUAGE_GUIDE.md
+*_PRIVATE*
+interview-prep/
