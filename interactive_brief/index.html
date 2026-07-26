@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>In Tandem | Retention Budget Allocation Brief</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#top">In Tandem <span>retention brief</span></a>
+      <nav aria-label="Sections">
+        <a href="#value">Value</a>
+        <a href="#insight">Insight</a>
+        <a href="#process">Process</a>
+        <a href="#recommend">Recommend</a>
+        <a href="#ship">Ship</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-inner">
+          <p class="eyebrow">Product data science · retention economics</p>
+          <h1>Spend the save budget where it actually keeps subscribers.</h1>
+          <p class="lede">
+            A causal allocation approach for In Tandem’s multi-offer retention problem:
+            choose who gets a nudge, discount, concierge — or nothing — under a hard $40,000 budget.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#value">See the business result</a>
+            <a class="button secondary" href="#process">Walk the iteration path</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="metric-ribbon reveal" aria-label="Headline results">
+        <article>
+          <span class="value bad">−$36k</span>
+          <p>Naive “high churn → concierge” incremental value on holdout (DR)</p>
+        </article>
+        <article>
+          <span class="value good">+$121k</span>
+          <p>Shipped uplift policy incremental value on the same holdout (DR)</p>
+        </article>
+        <article>
+          <span class="value">$39,996</span>
+          <p>Spend on the scoring set — within the $40,000 ceiling</p>
+        </article>
+        <article>
+          <span class="value">−3.9pp</span>
+          <p>Concierge hurts longest-tenure users — real sleeping dogs</p>
+        </article>
+      </section>
+
+      <section class="story-strip reveal">
+        <article>
+          <span class="step-index">1</span>
+          <h3>Start from a real experiment</h3>
+          <p>
+            Offers were randomized. That lets us estimate what each offer <em>causes</em>,
+            not just who looks risky.
+          </p>
+        </article>
+        <article>
+          <span class="step-index">2</span>
+          <h3>Find who is helped — and who is hurt</h3>
+          <p>
+            Average effects are tiny. Heterogeneity is not: tenure flips concierge from helpful to harmful.
+          </p>
+        </article>
+        <article>
+          <span class="step-index">3</span>
+          <h3>Allocate dollars, not just predictions</h3>
+          <p>
+            Convert lift into expected net revenue, skip negative bets, and fill the budget where each dollar earns.
+          </p>
+        </article>
+      </section>
+
+      <section class="reader-guide reveal" aria-label="How to read this brief">
+        <div>
+          <span class="guide-label">Incremental value</span>
+          <strong>What did we gain vs doing nothing?</strong>
+          <p>
+            Net retained revenue after offer cost, estimated on a held-out randomized slice.
+            Positive means the policy beat “send no offers.”
+          </p>
+        </div>
+        <div>
+          <span class="guide-label">Sleeping dogs</span>
+          <strong>Who should we leave alone?</strong>
+          <p>
+            People for whom a heavy offer makes leaving <em>more</em> likely.
+            Contacting them spends money to lose revenue.
+          </p>
+        </div>
+        <div>
+          <span class="guide-label">Budget allocation</span>
+          <strong>Why not treat everyone?</strong>
+          <p>
+            $40k cannot fund concierge for all ~40k prospects. We choose the offer mix that maximizes expected net value under the cap.
+          </p>
+        </div>
+      </section>
+
+      <section id="value" class="section">
+        <div class="section-header reveal">
+          <p class="eyebrow">The business translation</p>
+          <h2>Churn risk is a map. Retention spend needs a destination.</h2>
+          <p>
+            Targeting the people most likely to cancel with the biggest save offer is the natural first instinct —
+            and the wrong economic policy. The chart below is the stakeholder punchline:
+            same budget, opposite outcomes.
+          </p>
+        </div>
+
+        <div class="split reveal">
+          <div>
+            <div class="segmented" role="group" aria-label="Budget scenario">
+              <button type="button" class="is-active" data-budget="40k">$40k budget</button>
+              <button type="button" data-budget="20k">$20k budget</button>
+            </div>
+            <div id="value-chart" class="chart-shell"></div>
+          </div>
+          <aside class="panel" id="value-panel">
+            <p class="panel-kicker">Shipped policy</p>
+            <p class="big good">+$121,476</p>
+            <p data-field="compare">
+              Versus the naive policy (−$35,809), the shipped approach turns the same retention budget into
+              material positive incremental value on the honest holdout.
+            </p>
+            <div class="callout">
+              <strong>Finance takeaway:</strong> ROI conversations should compare policies on
+              <em>incremental retained revenue after cost</em>, not churn-model accuracy.
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="insight" class="section">
+        <div class="section-header reveal">
+          <p class="eyebrow">The insight that changes the offer mix</p>
+          <h2>Concierge is not “more of the same.” It helps new users and can hurt veterans.</h2>
+          <p>
+            Population averages (~+1.6pp for concierge) hide a sign flip. That is why a one-size offer —
+            or a churn-ranked concierge blast — funds sleeping dogs.
+          </p>
+        </div>
+        <div class="split reveal">
+          <div id="tenure-chart" class="chart-shell tall"></div>
+          <div class="section-copy">
+            <h3>What Product should take from this</h3>
+            <p>
+              Heavy-touch saves are a scarce instrument. Use them where tenure and engagement suggest the
+              subscriber is persuadable — not where they are simply high-risk.
+            </p>
+            <p>
+              Cheap nudges win most of the value-per-dollar allocations. Concierge appears sparingly in the
+              shipped scoring mix (61 of 40,000 users) because that is where the economics clear the bar.
+            </p>
+            <div class="callout">
+              <strong>Also caught:</strong> <code>offer_window_logins</code> looks usable on scoring data
+              but is measured after the offer is sent. It was excluded everywhere.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="process" class="section">
+        <div class="section-header reveal">
+          <p class="eyebrow">How the recommendation was earned</p>
+          <h2>Show the path, not just the polished ending.</h2>
+          <p>
+            The assignment grades judgment under ambiguity. We measured a bad policy on purpose, then only
+            promoted complexity when the holdout report card improved.
+          </p>
+        </div>
+
+        <div class="iteration-grid reveal">
+          <div class="iter-nav" role="tablist" aria-label="Iteration versions">
+            <button type="button" data-iter="v1">
+              <strong>v1 · Trap baseline</strong>
+              <span>Churn rank → concierge</span>
+            </button>
+            <button type="button" data-iter="v2">
+              <strong>v2 · Segments</strong>
+              <span>Shrunken offer effects</span>
+            </button>
+            <button type="button" class="is-active" data-iter="v3">
+              <strong>v3 · Shipped</strong>
+              <span>Personal uplift + λ budget</span>
+            </button>
+          </div>
+          <div class="iter-detail">
+            <h3 id="iter-title">v3 · Personal uplift scores (shipped)</h3>
+            <p id="iter-blurb"></p>
+            <div class="iter-stats">
+              <div>
+                <strong id="iter-dr" class="good">+$121k</strong>
+                <span>DR incremental (holdout)</span>
+              </div>
+              <div>
+                <strong id="iter-spend">$39,997</strong>
+                <span>Policy spend on holdout</span>
+              </div>
+              <div>
+                <strong id="iter-qini">0.043</strong>
+                <span>Diagnostic Qini (secondary)</span>
+              </div>
+            </div>
+            <p><strong>What we learned:</strong> <span id="iter-learn"></span></p>
+            <div id="mix-chart" class="chart-shell" style="margin-top: 1rem"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="recommend" class="section">
+        <div class="section-header reveal">
+          <p class="eyebrow">Recommendations</p>
+          <h2>What to do with this on Monday.</h2>
+        </div>
+        <div class="rec-grid reveal">
+          <article>
+            <h3>For Finance</h3>
+            <p>
+              Fund retention offers against <strong>incremental net retained revenue</strong>, with a
+              do-nothing and a churn-targeting baseline on every readout. At half budget, re-optimize —
+              our $20k re-solve still delivered about <strong>+$105k</strong> DR incremental on holdout,
+              showing diminishing returns as spend grows.
+            </p>
+          </article>
+          <article>
+            <h3>For Product</h3>
+            <p>
+              Default save journeys should not escalate every at-risk user to human outreach.
+              Prefer scalable nudges; reserve concierge for segments where experiments show positive lift
+              (newer subscribers, in this data). Treat “do nothing” as a first-class treatment.
+            </p>
+          </article>
+          <article>
+            <h3>For Data / ML</h3>
+            <p>
+              Block post-treatment features in the feature store. Keep a randomized holdout or exploration
+              slice so effect estimates stay honest after launch. Separate the ranking score used for
+              monitoring from the budgeted allocation objective.
+            </p>
+          </article>
+          <article>
+            <h3>For Leadership</h3>
+            <p>
+              The win is not a fancier model — it is refusing to pay sleeping dogs and forcing every offer
+              through a value-minus-cost gate under a real constraint. That is the operating principle to keep
+              as the subscription portfolio grows across In Tandem brands.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="ship" class="section">
+        <div class="section-header reveal">
+          <p class="eyebrow">Production sketch</p>
+          <h2>Batch scores. Live guardrails. Human-readable offer policy.</h2>
+          <p>
+            Training can be weekly; scoring should be a scheduled job that writes a policy table
+            Product and CRM tools can consume without waiting on a notebook.
+          </p>
+        </div>
+
+        <div class="reveal" style="margin-bottom: 2rem">
+          <div id="scoring-chart" class="chart-shell"></div>
+          <p style="color: var(--muted); margin: 0.75rem 0 0; font-size: 0.95rem">
+            Recommended scoring-set allocation: mostly no-offer or $1 nudges, selective discounts, rare concierge —
+            the mix that clears the value-minus-cost bar under $40k.
+          </p>
+        </div>
+        <div class="ops-grid reveal">
+          <div>
+            <strong>Weekly</strong>
+            <span>Refresh uplift models after new experiment or outcome windows close.</span>
+          </div>
+          <div>
+            <strong>Daily / campaign</strong>
+            <span>Score eligible subscribers; re-solve λ when budget or offer costs change.</span>
+          </div>
+          <div>
+            <strong>Always</strong>
+            <span>Monitor arm mix, spend, and realized lift on a randomized slice.</span>
+          </div>
+          <div>
+            <strong>Retrain when</strong>
+            <span>Effect decay, tenure mix shift, or offer creative changes break calibration.</span>
+          </div>
+        </div>
+
+        <div class="next-grid reveal" style="margin-top: 2rem">
+          <article>
+            <span class="next-index">01</span>
+            <h3>Keep measuring, don’t only predict</h3>
+            <p>
+              Preserve some random offer assignment (or explicit exploration) so the team can keep estimating
+              true lift after the policy ships.
+            </p>
+          </article>
+          <article>
+            <span class="next-index">02</span>
+            <h3>Make “no offer” visible in the product</h3>
+            <p>
+              CRM and lifecycle tools should treat suppression as an intentional action with an expected-value reason code.
+            </p>
+          </article>
+          <article>
+            <span class="next-index">03</span>
+            <h3>Segment playbooks for brand teams</h3>
+            <p>
+              Translate tenure × offer effects into brand-facing guidelines OurFamilyWizard / family-org teams can operationalize.
+            </p>
+          </article>
+          <article>
+            <span class="next-index">04</span>
+            <h3>Stress-test budgets before planning cycles</h3>
+            <p>
+              Maintain a value-vs-budget curve so Finance can see marginal ROI at $20k, $40k, and above before locking spend.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section final-section reveal">
+        <div>
+          <p class="eyebrow">Bottom line</p>
+          <h2>
+            Retention budget allocation is a constrained causal decision — not a churn leaderboard.
+          </h2>
+        </div>
+        <p>
+          We excluded the measurement trap, proved the naive policy loses money, found real sleeping dogs,
+          and shipped a cost-aware uplift policy that turns $40k into positive incremental retained revenue
+          on an honest holdout. The detailed notebook and writeup show every step.
+        </p>
+      </section>
+    </main>
+
+    <p class="footnote">
+      Numbers from a reproducible pipeline on the take-home synthetic dataset.
+      Technical detail: <a href="../Retention_Allocation.ipynb">Retention_Allocation.ipynb</a> ·
+      Narrative: <a href="../WRITEUP.md">WRITEUP.md</a>
+    </p>
+
+    <script src="app.js"></script>
+  </body>
+</html>
