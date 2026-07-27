@@ -5,7 +5,8 @@ __pycache__/
 .DS_Store
 outputs/*.log
 
-# Private interview prep — never submit
+# Private / workflow artifacts — never submit
 PLAIN_LANGUAGE_GUIDE.md
+AGENTS.md
 *_PRIVATE*
 interview-prep/
